@@ -2,7 +2,7 @@ var $ = function(sel) {
     return document.querySelector(sel);
 };
 
-var inputItems = ['text', 'color', 'alpha', 'space', 'size'];
+var inputItems = ['text', 'color', 'alpha', 'angle', 'space', 'size'];
 var input = {};
 
 var image = $('#image');
@@ -12,7 +12,7 @@ var autoRefresh = $('#auto-refresh');
 var file = null;
 var canvas = null;
 var textCtx = null;
-var redraw = null;
+var repaint = null;
 
 var dataURItoBlob = function(dataURI) {
     var binStr = atob(dataURI.split(',')[1]);
@@ -53,11 +53,9 @@ var readFile = function() {
             var ctx = canvas.getContext('2d');
             ctx.drawImage(img, 0, 0);
 
-            redraw = function() {
-                ctx.rotate(315 * Math.PI / 180);
+            repaint = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(img, 0, 0);
-                ctx.rotate(45 * Math.PI / 180);
             };
 
             drawText();
@@ -93,13 +91,18 @@ var makeStyle = function() {
 var drawText = function() {
     if (!canvas) return;
     var textSize = input.size.value * Math.max(15, (Math.min(canvas.width, canvas.height) / 25));
+    var centerX = canvas.width / 2;
+    var centerY = canvas.height / 2;
 
     if (textCtx) {
-        redraw();
+        repaint();
     } else {
         textCtx = canvas.getContext('2d');
-        textCtx.rotate(45 * Math.PI / 180);
     }
+
+    textCtx.save();
+    textCtx.translate(centerX, centerY);
+    textCtx.rotate(input.angle.value * Math.PI / 180);
 
     textCtx.fillStyle = makeStyle();
     textCtx.font = 'bold ' + textSize + 'px -apple-system,"Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","WenQuanYi Micro Hei",sans-serif';
@@ -111,11 +114,13 @@ var drawText = function() {
     var x = Math.ceil(step / (width + margin));
     var y = Math.ceil((step / (input.space.value * textSize)) / 2);
 
-    for (var i = 0; i < x; i++) {
+    for (var i = -x; i < x; i++) {
         for (var j = -y; j <= y; j++) {
             textCtx.fillText(input.text.value, (width + margin) * i, input.space.value * textSize * j);
         }
     }
+
+    textCtx.restore();
 };
 
 image.addEventListener('change', function() {
