@@ -7,7 +7,7 @@ Inspired by [sfz](https://github.com/joyqi/sfz) project, a tool for adding water
 Access address:
 
 1. [https://luhuadong.github.io/watermarking](https://luhuadong.github.io/watermarking/)
-2. [https://getiot.tech/webtools/watermark](https://getiot.tech/webtools/watermark/)
+2. [https://getiot.tech/webtools/watermarking](https://getiot.tech/webtools/watermarking/)
 
 ---
 
@@ -18,4 +18,4 @@ Access address:
 访问地址：
 
 1. [https://luhuadong.github.io/watermarking](https://luhuadong.github.io/watermarking/)
-2. [https://getiot.tech/webtools/watermark](https://getiot.tech/webtools/watermark/)
+2. [https://getiot.tech/webtools/watermarking](https://getiot.tech/webtools/watermarking/)
