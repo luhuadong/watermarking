@@ -32,7 +32,7 @@ var generateFileName = function() {
     };
 
     var d = new Date();
-    return '' + d.getFullYear() + '-' + (pad(d.getMonth() + 1)) + '-' + (pad(d.getDate())) + ' ' + (pad(d.getHours())) + (pad(d.getMinutes())) + (pad(d.getSeconds())) + '.png';
+    return '' + d.getFullYear() + (pad(d.getMonth() + 1)) + (pad(d.getDate())) + '-' + (pad(d.getHours())) + (pad(d.getMinutes())) + (pad(d.getSeconds())) + '.png';
 };
 
 var readFile = function() {
